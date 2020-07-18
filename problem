@@ -1,0 +1,23 @@
+防火墙以全部关闭，笔记本以太网以修改为静态IP，使用网络调试助手。
+  过程：
+
+1.First：移植"ParcelPostControlBoard1_new"这个工程的W5500部分进行尝试，
+看不懂FreeROTS的具体任务调度，也不清楚W5500的初始化有没有问题，直接尝
+试sendto发送或者recvfrom接收数据，均无现象。
+不能Ping通。
+
+2.Next:找了网上的的程序尝试，网上没有找到HAL库版本的，只能用库函数版本
+的来改。看野火的W5500模块使用视频,按照找到的源码一步步配，可能SPI1那部
+分库函数转HAL库有问题。UDP和TCP都试了均无现象。
+能够Ping通，发送数据黄灯会闪耀。
+
+3.The next: WIZNET官方库，完全不知道怎么移植，参考了F1系列的库函数版本
+移植，无现象。
+能够Ping通，发送数据黄灯会闪耀。
+
+3.Now:参考"PSBRemoteUpdate" 移植依然出现同上问题，这个工程师用于IAP更新，
+也跑了OS。下载PSBRemoteUpdate到对应的控制板上运行测试，根据
+#define APP_ETHERNET_LOCAL_TEST_MODE        (0x01)  // 0x0 - 关闭测试; 0x1 - UDP收发测试
+这个宏定义，测试UDP回传，或者单独发送接收均无效果，均无现象。
+能够Ping通，发送数据黄灯会闪耀。
+
